@@ -10,24 +10,30 @@ export default class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 'all',
+      selected: '',
       tabs: [],
       cards: []
     };
   }
 
   componentDidMount() {
+    this.setState({
+      tabs: tabData,
+      cards: cardData,
+      selected: tabData
+    })
     // Once the component has mounted, get the data and reflect that data on the state.
   }
 
   changeSelected = tab => {
+
     // this function should take in the tab and update the state with the new tab.
   };
 
   filterCards = () => {
     /* Right now this function only returns the cards on state.
       We're going to make this function more dynamic
-      by using it to filter out our cards for when a tab is selcted
+      by using it to filter out our cards for when a tab is selected
       
       Notice that we're passing this function to our <Cards /> component below.
       This function returns an array of cards, so we can just pass it down as such.
@@ -41,6 +47,7 @@ export default class Content extends Component {
   };
 
   render() {
+    console.log(this.state.cards)
     return (
       <div className="content-container">
         {/* 
@@ -48,7 +55,10 @@ export default class Content extends Component {
           `selectedTab` that includes the currently selected tab
           and `selectTabHandler` that includes the function to change the selected tab
         */}
-        <Tabs tabs={this.state.tabs} />
+        <Tabs tabs={this.state.tabs} 
+        selectedTab={this.state.selected} 
+        // selectTabHandler={} 
+        />
         <Cards cards={this.filterCards()} />
       </div>
     );
